@@ -1,4 +1,4 @@
-#Life Journal
+# Life Journal
 ## UVA Photography
 ### Contributors:
 ### Nurbol Lampert
