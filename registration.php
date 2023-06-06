@@ -19,6 +19,8 @@
             $passwordRepeat = $_POST["repeat_password"];
             $errors = array();
 
+            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
             if(empty($fullname) || empty($email) ||empty($password) || empty($passwordRepeat)){
                 array_push($errors, "All fields are required");
             }
@@ -36,7 +38,7 @@
                     echo "<div class='alert alert-danger'>$error</div>";
                 }
             }else{
-
+                require_once "database.php";
             }
         }
         ?>
