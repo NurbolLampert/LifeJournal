@@ -12,10 +12,11 @@ if (isset($_SESSION["user"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/registration.css">
 </head>
 <body>
     <div class="container">
+        <h1>Register</h1>
         <?php
         if (isset($_POST["submit"])) {
            $fullName = $_POST["fullname"];
@@ -69,23 +70,25 @@ if (isset($_SESSION["user"])) {
         ?>
         <form action="registration.php" method="post">
             <div class="form-group">
-                <input type="text" class="form-control" name="fullname" placeholder="Full Name:">
+                <input type="text" class="form-control" name="fullname" placeholder="Full Name">
             </div>
             <div class="form-group">
-                <input type="emamil" class="form-control" name="email" placeholder="Email:">
+                <input type="emamil" class="form-control" name="email" placeholder="Email">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" name="password" placeholder="Password:">
+                <input type="password" class="form-control" name="password" placeholder="Password">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" name="repeat_password" placeholder="Repeat Password:">
+                <input type="password" class="form-control" name="repeat_password" placeholder="Confirm Password">
             </div>
             <div class="form-btn">
                 <input type="submit" class="btn btn-primary" value="Register" name="submit">
             </div>
+            <div class="form-btn">
+                <input type="submit" class="btn btn-primary" value="Log In" name="submit" href="login.php">
+            </div>
         </form>
         <div>
-        <div><p>Already Registered <a href="login.php">Login Here</a></p></div>
       </div>
     </div>
 </body>
