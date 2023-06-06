@@ -23,7 +23,7 @@
                 array_push($errors, "All fields are required");
             }
             if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                array_push($errors, "Email is not valid");
+                array_push($errors, "mail is not valid");
             }
             if(strlen($password)<8){
                 array_push($errors, "Password must be at least 8 characters long");
