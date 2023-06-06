@@ -12,37 +12,11 @@ if (isset($_SESSION["user"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles/registration.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <?php
-        if(isset($_POST["submit"])){
-            $fullname = $_POST["fullname"];
-            $email = $_POST["email"];
-            $password = $_POST["password"];
-            $passwordRepeat = $_POST["repeat_password"];
-            $errors = array();
-
-            if(empty($fullname) || empty($email) ||empty($password) || empty($passwordRepeat)){
-                array_push($errors, "All fields are required");
-            }
-            if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                array_push($errors, "mail is not valid");
-            }
-            if(strlen($password)<8){
-                array_push($errors, "Password must be at least 8 characters long");
-            }
-            if($password!==$passwordRepeat){
-                array_push($errors, "Password does not match");
-            }
-            if(count($errors)>0){
-                foreach($errors as $error){
-                    echo "<div class='alert alert-danger'>$error</div>";
-                }
-            }else{
-
-            }
         if (isset($_POST["submit"])) {
            $fullName = $_POST["fullname"];
            $email = $_POST["email"];
@@ -89,6 +63,8 @@ if (isset($_SESSION["user"])) {
                 die("Something went wrong");
             }
            }
+          
+
         }
         ?>
         <form action="registration.php" method="post">
