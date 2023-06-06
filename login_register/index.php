@@ -19,5 +19,15 @@ if (!isset($_SESSION["user"])) {
         <h1>Welcome to Life Journal</h1>
         <a href="logout.php" class="btn btn-warning">Logout</a>
     </div>
+    <div class="content">
+        <form action="index.php" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="file" class="form-control" name="uploadfile" value="">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" name="upload" >UPLOAD</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
