@@ -7,8 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <?php
-        echo "hi";
-    ?>
+    <h1>Welcome to Life Journal</h1>
 </body>
 </html>
