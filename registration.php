@@ -9,6 +9,10 @@
 </head>
 <body>
     <div class="container">
+        <h1>Sign Up</h1>
+        <?php
+        print_r($_POST);
+        ?>
         <form action="registration.php" method="post">
             <div class="form-group">
                 <input type="text" name="fullname" placeholder="Full Name">
