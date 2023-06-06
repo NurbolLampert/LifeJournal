@@ -18,10 +18,10 @@ if (isset($_SESSION["user"])) {
     <div class="container">
         <?php
         if (isset($_POST["submit"])) {
-           $fullName = $_POST["fullname"];
-           $email = $_POST["email"];
-           $password = $_POST["password"];
-           $passwordRepeat = $_POST["repeat_password"];
+           $fullName = htmlspecialchars($_POST["fullname"]);
+           $email = htmlspecialchars($_POST["email"]);
+           $password = htmlspecialchars($_POST["password"]);
+           $passwordRepeat = htmlspecialchars($_POST["repeat_password"]);
            
            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 

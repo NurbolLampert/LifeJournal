@@ -18,8 +18,8 @@ if (isset($_SESSION["user"])) {
     <div class="container">
         <?php
         if (isset($_POST["login"])) {
-           $email = $_POST["email"];
-           $password = $_POST["password"];
+           $email = htmlspecialchars($_POST["email"]);
+           $password = htmlspecialchars($_POST["password"]);
             require_once "database.php";
             $sql = "SELECT * FROM users WHERE email = '$email'";
             $result = mysqli_query($conn, $sql);
