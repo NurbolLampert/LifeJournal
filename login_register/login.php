@@ -1,4 +1,7 @@
 <?php
+    include '../navbar.php';
+?>
+<?php
 session_start();
 if (isset($_SESSION["user"])) {
    header("Location: index.php");
@@ -34,7 +37,7 @@ if (isset($_SESSION["user"])) {
                     echo "<div class='alert alert-danger'>Password does not match</div>";
                 }
             }else{
-                echo "<div class='alert alert-danger'>Email does not match</div>";
+                echo "<div class='alert alert-danger'>Email does not exist</div>";
             }
         }
         ?>

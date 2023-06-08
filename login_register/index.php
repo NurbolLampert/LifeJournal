@@ -1,4 +1,7 @@
 <?php
+    include '../navbar.php';
+?>
+<?php
 session_start();
 if (!isset($_SESSION["user"])) {
    header("Location: login.php");
@@ -17,9 +20,7 @@ if (!isset($_SESSION["user"])) {
 <body>
     <div class="container">
         <h1>Welcome to Life Journal</h1>
-        <a href="logout.php" class="btn btn-warning">Logout</a>
-    </div>
-    <div class="content">
+        <div class="content">
         <form action="index.php" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <input type="file" class="form-control" name="uploadfile" value="">
@@ -28,6 +29,8 @@ if (!isset($_SESSION["user"])) {
                 <button type="submit" class="btn btn-primary" name="upload" >UPLOAD</button>
             </div>
         </form>
+    </div>
+        <a href="logout.php" class="btn btn-warning">Logout</a>
     </div>
 </body>
 </html>
