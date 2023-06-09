@@ -1,5 +1,5 @@
 <?php
-    include '../navbar.php';
+    include '../login_register/usernavbar.php';
 ?>
 <?php
 session_start();
