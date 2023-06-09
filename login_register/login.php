@@ -31,6 +31,8 @@ if (isset($_SESSION["user"])) {
                 if (password_verify($password, $user["password"])) {
                     session_start();
                     $_SESSION["user"] = "yes";
+                    $_SESSION['email'] = $email;
+                    echo $_SESSION['email'];
                     header("Location: index.php");
                     die();
                 }else{
@@ -39,6 +41,7 @@ if (isset($_SESSION["user"])) {
             }else{
                 echo "<div class='alert alert-danger'>Email does not exist</div>";
             }
+            
         }
         ?>
       <form action="login.php" method="post">
