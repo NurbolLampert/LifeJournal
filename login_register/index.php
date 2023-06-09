@@ -75,6 +75,24 @@ if (!isset($_SESSION["user"])) {
                     echo "File is not an image or is a raw image.";
                 }
             }
+
+            $userId = $_SESSION['user_id'];
+
+            // Fetch all image ids for this user
+            $query = "SELECT id FROM user_images WHERE user_id=?";
+            $stmt = mysqli_prepare($conn, $query);
+
+            if ($stmt) {
+                mysqli_stmt_bind_param($stmt, "i", $userId);
+                mysqli_stmt_execute($stmt);
+
+                $result = mysqli_stmt_get_result($stmt);
+
+                // Loop through each row and output an image tag
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo '<img src="displayImage.php?id=' . $row['id'] . '" />';
+                }
+            }
         ?>
 
 
