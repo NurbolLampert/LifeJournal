@@ -25,46 +25,43 @@ if (!isset($_SESSION["user"])) {
                 Add notes:
                 <textarea name="notes"></textarea>
                 <input type="submit" value="Upload Image" name="submit">
-                <a href="logout.php" class="btn btn-warning">Logout</a>
+        <a href="logout.php" class="btn btn-warning">Logout</a>
             </form>
-            <a href="../login_register/view.php">View</a>
         </div>
         <?php
-            $db = require_once "database.php";
-            // obtaining the user by email
-            $email = $_SESSION['email'];
-            $query = "SELECT id FROM users WHERE email = '$email'";
-            $result = mysqli_query($conn, $query);
-
-            if ($result) {
-                $row = mysqli_fetch_assoc($result);
-                $user_id = $row['id'];
-            } else {
-                // Query execution failed
-                echo "Error: " . mysqli_error($connection);
-            }
+            require_once "database.php";
             if(isset($_POST["submit"])) {
                 $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+                
+                // Test how the session variable works
+                $email = $_SESSION['email'];
+                $query = "SELECT id FROM users WHERE email = '$email'";
+                $result = mysqli_query($conn, $query);
+
+                if ($result) {
+                    $row = mysqli_fetch_assoc($result);
+                    $user_id = $row['id'];
+                    // Now you can use the user ID as needed
+                    echo "User ID: " . $user_id;
+                } else {
+                    // Query execution failed
+                    echo "Error: " . mysqli_error($connection);
+                }
 
                 if($check !== false) {
                     // read the image data
-                    $image = $_FILES['fileToUpload']['tmp_name'];
-                    $imgContent = addslashes(file_get_contents($image));
+                    $image = file_get_contents($_FILES['fileToUpload']['tmp_name']);
 
+                    // $userId = $_SESSION['user_id'];
                     $notes = $_POST['notes'];
-                    $dataTime = date("Y-m-d H:i:s");
 
-                    if($db->connect_error){
-                        die("Connection failed: " . $db->connect_error);
-                    }
-
-                    $stmt = $db->query("INSERT into user_images (user_id, image, created_date, notes) VALUES ('$user_id', '$imgContent', '$dataTime', '$notes')");
+                    // Prepare an insert statement
+                    $stmt = mysqli_prepare($conn, "INSERT INTO user_images (user_id, image, notes) VALUES (?, ?, ?)");
 
                     if($stmt){
                         // Bind variables to the prepared statement as parameters
-                        mysqli_stmt_bind_param($stmt, "iss", $user_id, $image, $dataTime, $notes);
+                        mysqli_stmt_bind_param($stmt, "iss", $user_id, $image, $notes);
                         // Attempt to execute the prepared statement
-                        echo "Success";
                         if(mysqli_stmt_execute($stmt)){
                             // Redirect to login page
                             header("location: index.php");
@@ -78,10 +75,27 @@ if (!isset($_SESSION["user"])) {
                     echo "File is not an image or is a raw image.";
                 }
             }
-            
-        ?>
+    ?>
 
 
     </div>
 </body>
 </html>
+
+<?php 
+    require_once "database.php";
+    $email = $_SESSION['email'];
+    $getuser = "SELECT id FROM users WHERE email = '$email'";
+    $userId = mysqli_query($conn, $getuser);
+    while ($row = mysqli_fetch_array($userId)) {
+        $user_id = $row['id'];
+    }
+    $sql = "SELECT * FROM user_images WHERE user_id = '$user_id'";
+    $result = mysqli_query($conn, $sql);
+    while ($row = mysqli_fetch_array($result)) {
+        echo "<div class='container'>";
+        echo "<img src='data:image/jpeg;base64,".base64_encode($row['image'])."' width='200px' height='200px'>";
+        echo "<p>".$row['notes']."</p>";
+        echo "</div>";
+    }
+?>
